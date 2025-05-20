@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zen_app/core/reuseables/custom_button.dart';
@@ -12,6 +13,7 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  final player = AudioPlayer();
   Timer? timer;
   String text = 'Onboarding Screen';
   int count = 0;
@@ -33,6 +35,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     // TODO: implement initState
     super.initState();
     textBlinking();
+  }
+
+  void playSound() {
+    player.play(AssetSource('audio/orin.mp3'));
+    // await player.play(UrlSource(
+    //     'https://pixabay.com/music/modern-country-country-song-nobody-is-you-334647/'));
   }
 
   @override
@@ -69,16 +77,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               bgColor: Colors.tealAccent,
               textColor: const Color.fromARGB(255, 60, 59, 59),
               onPress: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    // behavior: SnackBarBehavior.fixed,
-                    // action: SnackBarAction(
-                    //   label: 'X',
-                    //   onPressed: () {},
-                    // ),
-                    content: Text('Coming Soon...'),
-                  ),
-                );
+                playSound();
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //   const SnackBar(
+                //     // behavior: SnackBarBehavior.fixed,
+                //     // action: SnackBarAction(
+                //     //   label: 'X',
+                //     //   onPressed: () {},
+                //     // ),
+                //     content: Text('Coming Soon...'),
+                //   ),
+                // );
               },
             )
           ],

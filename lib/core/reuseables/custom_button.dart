@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
   final bool hasIcon;
   final Color? bgColor;
   final Color? textColor;
+  final double? fontSize;
   // final VoidCallback onTap;
   final Function() onPress;
   const CustomButton({
@@ -18,6 +19,7 @@ class CustomButton extends StatelessWidget {
     this.hasIcon = false,
     this.bgColor = const Color.fromARGB(255, 18, 80, 20),
     this.textColor,
+    this.fontSize = 20,
   });
 
   @override
@@ -39,7 +41,7 @@ class CustomButton extends StatelessWidget {
               style: GoogleFonts.poppins(
                 color: textColor ?? Colors.white,
                 fontWeight: FontWeight.w700,
-                fontSize: 20,
+                fontSize: fontSize,
               ),
             ),
             if (hasIcon) ...[
