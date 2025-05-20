@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:zen_app/core/reuseables/custom_button.dart';
 import 'package:zen_app/features/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -145,48 +146,19 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(
               height: 10,
             ),
-            GestureDetector(
-              onTap: () {
+            CustomButton(
+              text: 'Go to Onboarding',
+              // bgColor: Colors.red,
+              hasIcon: true,
+              icon: (Icons.arrow_forward),
+              onPress: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
                     return const OnboardingScreen();
                   }),
                 );
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const OnboardingScreen(),
-                //   ),
-                //   (route) => true,
-                // );
               },
-              child: Container(
-                height: 55,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 18, 80, 20),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Go to HomePage',
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    const Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                    )
-                  ],
-                ),
-              ),
             ),
             // Text(
             //   'ks  sn scnskc sncks cjks vjnfj wjfnsk cjf jbfjw fjs jwdnkwfnjebfje fkwnfj ejnfjebfjenfjwbgbejngekbgjebjfgb ks  sn scnskc sncks cjks vjnfj wjfnsk cjf jbfjw fjs jwdnkwfnjebfje fkwnfj ejnfjebfjenfjwbgbejngekbgjebjfgbks  sn scnskc sncks cjks vjnfj wjfnsk cjf jbfjw fjs jwdnkwfnjebfje fkwnfj ejnfjebfjenfjwbgbejngekbgjebjfgb',
