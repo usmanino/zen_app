@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:zen_app/controllers/employee.dart';
 import 'package:zen_app/core/reuseables/custom_button.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -13,6 +14,9 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  final em = Employee(
+      // role: 'Developer',
+      );
   final player = AudioPlayer();
   Timer? timer;
   String text = 'Onboarding Screen';
@@ -132,6 +136,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       child: Container(
                         height: 500,
                         child: ListView.builder(
+                          padding: const EdgeInsets.only(bottom: 20),
                           itemCount: cars.length,
                           itemBuilder: (context, index) {
                             return Container(
@@ -184,7 +189,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                   ],
-                )
+                ),
+                const SizedBox(height: 30),
+                CustomButton(
+                  text: 'Get',
+                  onPress: () {
+                    em.get(name: 'Factorial', role: 'Developer');
+                  },
+                ),
               ],
             ),
           ),
