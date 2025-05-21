@@ -1,13 +1,7 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:zen_app/controllers/employee.dart';
-import 'package:zen_app/core/reuseables/custom_button.dart';
-import 'package:zen_app/features/onboarding/country_data_screen.dart';
+import 'package:zen_app/core/models/onboarding_model.dart';
+import 'package:zen_app/core/style/colors.dart';
+import 'package:zen_app/features/auth/login_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -17,237 +11,162 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  // final em = Employee(
-  //     // role: 'Developer',
-  //     );
-  final player = AudioPlayer();
-  Timer? timer;
-  String text = 'Onboarding Screen';
-  int count = 0;
-  void textBlinking() {
-    timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      count++;
-      setState(() {
-        if (count % 2 == 0) {
-          text = 'Onboarding Screen';
-        } else {
-          text = '';
-        }
-      });
-    });
+  int selectedPageIndex = 0;
+
+  PageController pageController = PageController();
+  bool get isLastPage => selectedPageIndex == onboardingModels.length - 1;
+
+  forwardAction() {
+    if (isLastPage) {
+      // Navigator.pushAndRemoveUntil(context,
+      //     MaterialPageRoute(builder: (context) {
+      //   return const LoginScreen();
+      // }), (route) => false);
+      //go to home page
+    } else {
+      pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
+    }
   }
-
-  List cars = [
-    'Audi',
-    'BMW',
-    'Mercedes',
-    'Volvo',
-    'Honda',
-    'Toyota',
-    'Lexus',
-    'Ford',
-    'Chevrolet',
-    'Dodge',
-    'Nissan',
-    'Suzuki',
-    'Mazda',
-    'Hyundai',
-    'Kia',
-    'Subaru',
-    'Mitsubishi',
-    'Hyundai',
-  ];
-
-  List foods = [
-    'Pizza',
-    'Burger',
-    'Tacos',
-    'Ice Cream',
-    'Hot Dog',
-    'French Fries',
-    'Sushi',
-    'Ramen',
-    'Spaghetti',
-    'Salad',
-    'Pasta',
-    'Sandwich',
-    'Steak',
-    'Meat',
-  ];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // textBlinking();
   }
 
-  // void playSound() {
-  //   // player.play(
-  //   //   AssetSource('audio/orin.mp3'),
-  //   // );
-  //   player.play(UrlSource(
-  //       'https://firebasestorage.googleapis.com/v0/b/atop-c60ad.appspot.com/o/ORIN%2FEDE%2FEDE%20-%20Bata%20a%20ro%20kokoka.mp3?alt=media&token=8ba1f67a-cb65-4a95-95e4-71f8b32fdce9'));
-  // }
-
-  void playSound() => player.play(UrlSource(
-      'https://firebasestorage.googleapis.com/v0/b/atop-c60ad.appspot.com/o/ORIN%2FEDE%2FEDE%20-%20Bata%20a%20ro%20kokoka.mp3?alt=media&token=8ba1f67a-cb65-4a95-95e4-71f8b32fdce9'));
+  List<OnboardingModel> onboardingModels = [
+    OnboardingModel(
+      icon: Icons.location_on,
+      title: 'Discover Nearby',
+      description:
+          'Find local spots, connect with your community, and explore what’s around you with just a few taps. Let your location guide your experience.',
+      buttonText: 'Next',
+      buttonColor: Colors.blue,
+      backgroundColor: AppColor().primary,
+      textColor: Colors.white,
+    ),
+    OnboardingModel(
+      icon: Icons.search,
+      title: 'Explore Features',
+      description:
+          'Search, filter, and find exactly what you’re looking for. Our smart tools make it easy to navigate and discover new content effortlessly.',
+      buttonText: 'Next',
+      buttonColor: Colors.green,
+      backgroundColor: AppColor().limeGreen,
+      textColor: Colors.black87,
+    ),
+    OnboardingModel(
+      icon: Icons.person_add,
+      title: 'Create Your Profile',
+      description:
+          'Sign up to personalize your experience. Save preferences, connect with others, and access exclusive features tailored to you.',
+      buttonText: 'Get Started',
+      buttonColor: Colors.brown,
+      backgroundColor: const Color.fromARGB(255, 225, 207, 50),
+      textColor: Colors.deepPurple.shade900,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: SingleChildScrollView(
+      body: PageView.builder(
+        controller: pageController,
+        itemCount: onboardingModels.length,
+        itemBuilder: (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+              color: onboardingModels[index].backgroundColor,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Center(
-                  child: Card(
-                    elevation: 20,
-                    shadowColor: Colors.red,
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        onboardingModels[index].icon,
+                        color: Colors.white,
+                        size: 100,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        onboardingModels[index].title!,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        onboardingModels[index].description!,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    forwardAction();
+
+                    if (onboardingModels[index].buttonText.toString() ==
+                        'Get Started') {
+                      print(isLastPage);
+                      Navigator.pushReplacement(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (_, animation, __) =>
+                              const LoginScreen(),
+                          transitionsBuilder: (_, animation, __, child) {
+                            return FadeTransition(
+                                opacity: animation, child: child);
+                          },
+                          transitionDuration: const Duration(milliseconds: 500),
+                        ),
+                      );
+                    }
+                    // page.animateToPage(
+                    //   index + 1,
+                    //   duration: const Duration(milliseconds: 500),
+                    //   curve: Curves.easeInOut,
+                    // );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: onboardingModels[index].buttonColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text(text),
-                      ),
+                  ),
+                  child: Text(
+                    onboardingModels[index].buttonText!,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
-                Platform.isIOS
-                    ? CupertinoButton(
-                        child: Text('Get Started'),
-                        color: const Color.fromARGB(255, 206, 167, 9),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Ask for Permissions'),
-                                content: const Text(
-                                  'Are you sure you wanna navigate to the app?',
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.of(context).pop(),
-                                    child: const Text('No'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () async {
-                                      Navigator.of(context).pop();
-                                      await Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return const CountryDataScreen();
-                                      }));
-                                    },
-                                    child: const Text('Yes'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (context) {
-                          //   return const CountryDataScreen();
-                          // }));
-                          // playSound();
-                        },
-                      )
-                    : CustomButton(
-                        text: 'Get Started',
-                        bgColor: Colors.tealAccent,
-                        textColor: const Color.fromARGB(255, 116, 73, 73),
-                        onPress: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const CountryDataScreen();
-                          }));
-                          // playSound();
-                        },
-                      ),
-                const SizedBox(height: 30),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 500,
-                        child: ListView.builder(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          itemCount: cars.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              padding: const EdgeInsets.all(10),
-                              margin: const EdgeInsets.all(2),
-                              color:
-                                  index % 2 == 0 ? Colors.white : Colors.grey,
-                              child: Row(
-                                children: [
-                                  // const Icon(Icons.car_rental),
-                                  Image.asset(
-                                    'assets/cars/audi.jpg',
-                                    height: 50,
-                                    width: 50,
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(cars[index]),
-                                      Text(DateTime.now().toString()),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  const Column(
-                                    children: [
-                                      Text('\$200'),
-                                      Text('Free'),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                            // ListTile(
-                            //   leading: Icon(Icons.car_rental),
-                            //   title: Text(cars[index]),
-                            //   subtitle: Text(DateTime.now().toString()),
-                            //   trailing: Column(
-                            //     children: [
-                            //       Text('\$200'),
-                            //       Text('Free'),
-                            //     ],
-                            //   ),
-                            // );
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 30),
-                CustomButton(
-                  text: 'Get',
-                  onPress: () {
-                    // em.get(name: 'Factorial', role: 'Developer');
-                  },
+                const SizedBox(
+                  height: 30,
                 ),
               ],
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

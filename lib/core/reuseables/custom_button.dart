@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:zen_app/features/onboarding/onboarding_screen.dart';
+import 'package:zen_app/features/test/onboarding_screen.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
