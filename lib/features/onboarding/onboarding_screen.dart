@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zen_app/controllers/employee.dart';
@@ -15,9 +17,9 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  final em = Employee(
-      // role: 'Developer',
-      );
+  // final em = Employee(
+  //     // role: 'Developer',
+  //     );
   final player = AudioPlayer();
   Timer? timer;
   String text = 'Onboarding Screen';
@@ -122,18 +124,58 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                CustomButton(
-                  text: 'Get Started',
-                  bgColor: Colors.tealAccent,
-                  textColor: const Color.fromARGB(255, 60, 59, 59),
-                  onPress: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const CountryDataScreen();
-                    }));
-                    // playSound();
-                  },
-                ),
+                Platform.isIOS
+                    ? CupertinoButton(
+                        child: Text('Get Started'),
+                        color: const Color.fromARGB(255, 206, 167, 9),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Ask for Permissions'),
+                                content: const Text(
+                                  'Are you sure you wanna navigate to the app?',
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(),
+                                    child: const Text('No'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () async {
+                                      Navigator.of(context).pop();
+                                      await Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return const CountryDataScreen();
+                                      }));
+                                    },
+                                    child: const Text('Yes'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          // Navigator.push(context,
+                          //     MaterialPageRoute(builder: (context) {
+                          //   return const CountryDataScreen();
+                          // }));
+                          // playSound();
+                        },
+                      )
+                    : CustomButton(
+                        text: 'Get Started',
+                        bgColor: Colors.tealAccent,
+                        textColor: const Color.fromARGB(255, 116, 73, 73),
+                        onPress: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return const CountryDataScreen();
+                          }));
+                          // playSound();
+                        },
+                      ),
                 const SizedBox(height: 30),
                 Row(
                   children: [
@@ -199,7 +241,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 CustomButton(
                   text: 'Get',
                   onPress: () {
-                    em.get(name: 'Factorial', role: 'Developer');
+                    // em.get(name: 'Factorial', role: 'Developer');
                   },
                 ),
               ],

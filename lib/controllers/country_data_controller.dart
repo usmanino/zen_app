@@ -5,10 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:zen_app/api/apis.dart';
+import 'package:zen_app/controllers/employee.dart';
+import 'package:zen_app/core/models/country_model.dart';
 
 class CountryDataController extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  final service = CountryService();
+
+  List<Countrymodel> _countrymodels = [];
+  List<Countrymodel> get countrymodels => _countrymodels;
 
   // void getUser() {
   //   try {
@@ -25,39 +32,11 @@ class CountryDataController extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
 
-      var response = await http.get(
-        Uri.parse(Apis.baseUrl + Apis.data),
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          // 'Authorization': 'Bearer ${StorageService().getString('token')}'
-        },
-      ).timeout(const Duration(seconds: 60));
+      final result = await service.fetchCountry();
+      _countrymodels = result['data'];
 
-      print('statusCode::: ${response.statusCode}');
-      print('response::: ${response.body}');
-
-      //success
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        // Wallets? wallets =
-        //     Wallets.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-        // _walletsService.setWalletsData = wallets.data;
-        // dPrint('Wallets fetched:::');
-        // //isLoading = false;
-        // //notifyListeners();
-        // fetchCurrencies(context);
-      }
-      //failure
-      else {
-        _isLoading = false;
-        notifyListeners();
-        print('error ${response.body}');
-        Fluttertoast.showToast(
-          msg: json.decode(response.body),
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-        );
-      }
+      _isLoading = false;
+      notifyListeners();
     } on SocketException {
       _isLoading = false;
       notifyListeners();
@@ -66,7 +45,8 @@ class CountryDataController extends ChangeNotifier {
         backgroundColor: Colors.red,
         textColor: Colors.white,
       );
-    } catch (e) {
+    } catch (e, x) {
+      print(x);
       _isLoading = false;
       notifyListeners();
       print("Error received on fetching wallets: ${e.toString()}");
@@ -77,4 +57,40 @@ class CountryDataController extends ChangeNotifier {
       );
     }
   }
+
+  //  Future<void> getTransactionHistory({
+  //   required BuildContext context,
+  //   required int currentPage,
+  // }) async {
+  //   _transactionHistoryModel.clear();
+  //   isTransactionHistoryLoading = true;
+
+  //   notifyListeners();
+  //   try {
+  //     final result =
+  //         await _transactionService.fetchTransactions(page: currentPage);
+  //     _transactionHistoryModel = result['transactions'];
+  //     // final fetchedTransactions = result['transactions'];
+  //     _paginationMeta = result['meta'];
+
+  //     // _transactionHistoryModel = fetchedTransactions + _transactionHistoryModel;
+
+  //     isTransactionHistoryLoading = false;
+  //     errorType = null;
+  //     notifyListeners();
+  //     dPrint('redeemed fetched:::');
+  //   } on SocketException {
+  //     isTransactionHistoryLoading = false;
+
+  //     errorType = ErrorType.socketException;
+  //     notifyListeners();
+  //   } catch (e, x) {
+  //     isTransactionHistoryLoading = false;
+
+  //     errorType = ErrorType.otherException;
+  //     notifyListeners();
+  //     dPrint("Error received on fetching transactions: ${e.toString()}");
+  //     dPrint("Error received on fetching transactions: ${x.toString()}");
+  //   }
+  // }
 }

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zen_app/controllers/country_data_controller.dart';
@@ -23,17 +26,38 @@ class _CountryDataScreenState extends State<CountryDataScreen> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<CountryDataController>(context);
-    return const Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              Text('data'),
-            ],
-          ),
-        ),
-      ),
+    return Scaffold(
+      body: model.isLoading
+          ? Center(
+              child: Platform.isIOS
+                  ? CupertinoActivityIndicator()
+                  : CircularProgressIndicator(),
+            )
+          : SafeArea(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: model.countrymodels.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title:
+                                Text(model.countrymodels[index].nation ?? '--'),
+                            subtitle: Text(
+                                model.countrymodels[index].idNation ?? '--'),
+                            trailing: Text(
+                              model.countrymodels[index].idYear.toString(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
     );
   }
 }
