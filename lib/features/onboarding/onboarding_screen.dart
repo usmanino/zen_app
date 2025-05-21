@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zen_app/controllers/employee.dart';
 import 'package:zen_app/core/reuseables/custom_button.dart';
+import 'package:zen_app/features/onboarding/country_data_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -126,7 +127,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   bgColor: Colors.tealAccent,
                   textColor: const Color.fromARGB(255, 60, 59, 59),
                   onPress: () {
-                    playSound();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const CountryDataScreen();
+                    }));
+                    // playSound();
                   },
                 ),
                 const SizedBox(height: 30),

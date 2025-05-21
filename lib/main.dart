@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zen_app/controllers/country_data_controller.dart';
+import 'package:zen_app/controllers/splash_controller.dart';
 import 'package:zen_app/features/splash/splash_screen.dart';
 
 void main() {
@@ -11,16 +14,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme:
-          // ThemeData.dark()
-          ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 52, 8, 225)),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => SplashController()),
+        ChangeNotifierProvider(create: (context) => CountryDataController()),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme:
+            // ThemeData.dark()
+            ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 52, 8, 225),
+          ),
+          useMaterial3: true,
+        ),
+        home: const SplashScreen(),
       ),
-      home: const SplashScreen(),
     );
   }
 }
