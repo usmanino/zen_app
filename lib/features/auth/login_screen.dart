@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:zen_app/core/reuseables/custom_button.dart';
 import 'package:zen_app/core/reuseables/custom_input_field.dart';
 import 'package:zen_app/core/style/colors.dart';
+import 'package:zen_app/features/dashboard/dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -81,7 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: 'Log In',
                     onPress: () {
                       if (formKey.currentState!.validate()) {
-                        print('Form is valid');
+                        Navigator.pushAndRemoveUntil(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const Dashboard();
+                        }), (route) => false);
                       }
                     },
                   ),

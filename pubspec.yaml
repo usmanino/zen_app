@@ -41,6 +41,7 @@ dependencies:
   http: ^1.4.0
   fluttertoast: ^8.2.12
   sizer: ^3.0.4
+  flutter_svg: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +72,7 @@ flutter:
     - assets/svgs/
     - assets/audio/
     - assets/cars/
+    - assets/dashboard/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
