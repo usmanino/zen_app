@@ -76,6 +76,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: PageView.builder(
         controller: pageController,
         itemCount: onboardingModels.length,
+        
         itemBuilder: (context, index) {
           return Container(
             decoration: BoxDecoration(

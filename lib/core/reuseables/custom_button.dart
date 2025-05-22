@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:zen_app/core/style/colors.dart';
 import 'package:zen_app/features/test/onboarding_screen.dart';
 
 class CustomButton extends StatelessWidget {
@@ -17,7 +18,7 @@ class CustomButton extends StatelessWidget {
     this.icon,
     required this.onPress,
     this.hasIcon = false,
-    this.bgColor = const Color.fromARGB(255, 18, 80, 20),
+    this.bgColor,
     this.textColor,
     this.fontSize = 20,
   });
@@ -30,7 +31,7 @@ class CustomButton extends StatelessWidget {
         height: 55,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: bgColor,
+          color: bgColor ?? AppColor().black,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -38,9 +39,9 @@ class CustomButton extends StatelessWidget {
           children: [
             Text(
               text,
-              style: GoogleFonts.poppins(
+              style: GoogleFonts.inter(
                 color: textColor ?? Colors.white,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
                 fontSize: fontSize,
               ),
             ),

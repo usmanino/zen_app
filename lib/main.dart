@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:zen_app/controllers/country_data_controller.dart';
 import 'package:zen_app/controllers/splash_controller.dart';
 import 'package:zen_app/features/splash/splash_screen.dart';
@@ -19,17 +20,21 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => SplashController()),
         ChangeNotifierProvider(create: (context) => CountryDataController()),
       ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme:
-            // ThemeData.dark()
-            ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 52, 8, 225),
-          ),
-          useMaterial3: true,
-        ),
-        home: const SplashScreen(),
+      child: Sizer(
+        builder: (BuildContext, Orientation, ScreenType) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme:
+                // ThemeData.dark()
+                ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: const Color.fromARGB(255, 52, 8, 225),
+              ),
+              useMaterial3: true,
+            ),
+            home: const SplashScreen(),
+          );
+        },
       ),
     );
   }
