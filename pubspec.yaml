@@ -42,6 +42,8 @@ dependencies:
   fluttertoast: ^8.2.12
   sizer: ^3.0.4
   flutter_svg: ^2.1.0
+  google_maps_flutter: ^2.10.1
+  location: ^7.0.1
 
 dev_dependencies:
   flutter_test:

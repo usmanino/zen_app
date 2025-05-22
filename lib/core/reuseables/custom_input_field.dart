@@ -13,6 +13,12 @@ class CustomInputField extends StatefulWidget {
   final bool? isPassword;
   final bool? hasSurfix;
   final dynamic validator;
+  final bool? hasPrefix;
+  final IconData? prefixIcon;
+  final Color? prefixIconColor;
+  final bool? readOnly;
+  final Function()? onTap;
+
   const CustomInputField({
     super.key,
     this.hintText,
@@ -26,6 +32,11 @@ class CustomInputField extends StatefulWidget {
     this.isPassword = false,
     this.hasSurfix = false,
     this.validator,
+    this.hasPrefix,
+    this.prefixIcon,
+    this.prefixIconColor,
+    this.readOnly,
+    this.onTap,
   });
 
   @override
@@ -52,6 +63,8 @@ class _CustomInputFieldState extends State<CustomInputField> {
         fontSize: 16,
         fontWeight: FontWeight.w400,
       ),
+      readOnly: widget.readOnly ?? false,
+      onTap: widget.onTap,
       validator: widget.validator,
       decoration: InputDecoration(
         hintText: widget.hintText,
@@ -90,6 +103,12 @@ class _CustomInputFieldState extends State<CustomInputField> {
             width: 1,
           ),
         ),
+        prefixIcon: widget.hasPrefix == true
+            ? Icon(
+                widget.prefixIcon,
+                color: widget.prefixIconColor!,
+              )
+            : null,
         suffixIcon: widget.hasSurfix == true
             ? GestureDetector(
                 onTap: () {
