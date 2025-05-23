@@ -2,15 +2,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:zen_app/controllers/auth_contoller.dart';
 import 'package:zen_app/controllers/country_data_controller.dart';
 import 'package:zen_app/controllers/splash_controller.dart';
 import 'package:zen_app/features/splash/splash_screen.dart';
 import 'package:zen_app/firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
-      // options: DefaultFirebaseOptions.currentPlatform,
-      );
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(const MyApp());
 }
@@ -25,6 +28,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => SplashController()),
         ChangeNotifierProvider(create: (context) => CountryDataController()),
+        ChangeNotifierProvider(create: (context) => AuthController()),
       ],
       child: Sizer(
         builder: (BuildContext, Orientation, ScreenType) {

@@ -10,29 +10,32 @@ class CustomButton extends StatelessWidget {
   final Color? bgColor;
   final Color? textColor;
   final double? fontSize;
+  final bool? enable;
   // final VoidCallback onTap;
   final Function() onPress;
   final bool isRounded;
-  const CustomButton(
-      {super.key,
-      required this.text,
-      this.icon,
-      required this.onPress,
-      this.hasIcon = false,
-      this.bgColor,
-      this.textColor,
-      this.fontSize = 20,
-      this.isRounded = false});
+  const CustomButton({
+    super.key,
+    required this.text,
+    this.icon,
+    required this.onPress,
+    this.hasIcon = false,
+    this.bgColor,
+    this.textColor,
+    this.fontSize = 20,
+    this.isRounded = false,
+    this.enable = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPress,
+      onTap: enable! ? onPress : null,
       child: Container(
         height: 55,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: bgColor ?? AppColor().black,
+          color: enable! ? bgColor ?? AppColor().black : Colors.grey,
           borderRadius: isRounded
               ? BorderRadius.circular(100)
               : BorderRadius.circular(12),
