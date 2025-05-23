@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:zen_app/core/reuseables/custom_button.dart';
 import 'package:zen_app/core/reuseables/custom_input_field.dart';
 import 'package:zen_app/core/style/colors.dart';
+import 'package:zen_app/features/auth/signup_screen.dart';
 import 'package:zen_app/features/dashboard/dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -116,7 +117,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: 'Sign Up',
                     bgColor: const Color(0xffEFF1F5),
                     textColor: AppColor().black,
-                    onPress: () {},
+                    onPress: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const SignupScreen()));
+                    },
                   ),
                 ],
               ),

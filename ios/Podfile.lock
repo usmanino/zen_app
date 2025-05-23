@@ -1,6 +1,37 @@
 PODS:
   - audioplayers_darwin (0.0.1):
     - Flutter
+  - Firebase/Auth (11.10.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 11.10.0)
+  - Firebase/CoreOnly (11.10.0):
+    - FirebaseCore (~> 11.10.0)
+  - firebase_auth (5.5.4):
+    - Firebase/Auth (= 11.10.0)
+    - firebase_core
+    - Flutter
+  - firebase_core (3.13.1):
+    - Firebase/CoreOnly (= 11.10.0)
+    - Flutter
+  - FirebaseAppCheckInterop (11.13.0)
+  - FirebaseAuth (11.10.0):
+    - FirebaseAppCheckInterop (~> 11.0)
+    - FirebaseAuthInterop (~> 11.0)
+    - FirebaseCore (~> 11.10.0)
+    - FirebaseCoreExtension (~> 11.10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GTMSessionFetcher/Core (< 5.0, >= 3.4)
+    - RecaptchaInterop (~> 101.0)
+  - FirebaseAuthInterop (11.13.0)
+  - FirebaseCore (11.10.0):
+    - FirebaseCoreInternal (~> 11.10.0)
+    - GoogleUtilities/Environment (~> 8.0)
+    - GoogleUtilities/Logger (~> 8.0)
+  - FirebaseCoreExtension (11.10.0):
+    - FirebaseCore (~> 11.10.0)
+  - FirebaseCoreInternal (11.10.0):
+    - "GoogleUtilities/NSData+zlib (~> 8.0)"
   - Flutter (1.0.0)
   - fluttertoast (0.0.2):
     - Flutter
@@ -15,14 +46,39 @@ PODS:
   - GoogleMaps/Base (8.4.0)
   - GoogleMaps/Maps (8.4.0):
     - GoogleMaps/Base
+  - GoogleUtilities/AppDelegateSwizzler (8.1.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (8.1.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Logger (8.1.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (8.1.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (8.1.0)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (8.1.0)
+  - GoogleUtilities/Reachability (8.1.0):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GTMSessionFetcher/Core (4.5.0)
   - location (0.0.1):
     - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - RecaptchaInterop (101.0.0)
 
 DEPENDENCIES:
   - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
+  - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
+  - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
@@ -31,12 +87,26 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Firebase
+    - FirebaseAppCheckInterop
+    - FirebaseAuth
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseCoreExtension
+    - FirebaseCoreInternal
     - Google-Maps-iOS-Utils
     - GoogleMaps
+    - GoogleUtilities
+    - GTMSessionFetcher
+    - RecaptchaInterop
 
 EXTERNAL SOURCES:
   audioplayers_darwin:
     :path: ".symlinks/plugins/audioplayers_darwin/ios"
+  firebase_auth:
+    :path: ".symlinks/plugins/firebase_auth/ios"
+  firebase_core:
+    :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
     :path: Flutter
   fluttertoast:
@@ -50,13 +120,25 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   audioplayers_darwin: ccf9c770ee768abb07e26d90af093f7bab1c12ab
+  Firebase: 1fe1c0a7d9aaea32efe01fbea5f0ebd8d70e53a2
+  firebase_auth: 4d9603c196d22f71e80cf518b71939c4f2117088
+  firebase_core: ba71b44041571da878cb624ce0d80250bcbe58ad
+  FirebaseAppCheckInterop: 72066489c209823649a997132bcd9269bc33a4bb
+  FirebaseAuth: c4146bdfdc87329f9962babd24dae89373f49a32
+  FirebaseAuthInterop: 4fa327ec3c551a80a6929561f83af80b1dd44937
+  FirebaseCore: 8344daef5e2661eb004b177488d6f9f0f24251b7
+  FirebaseCoreExtension: 6f357679327f3614e995dc7cf3f2d600bdc774ac
+  FirebaseCoreInternal: ef4505d2afb1d0ebbc33162cb3795382904b5679
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   fluttertoast: 2c67e14dce98bbdb200df9e1acf610d7a6264ea1
   Google-Maps-iOS-Utils: 66d6de12be1ce6d3742a54661e7a79cb317a9321
   google_maps_flutter_ios: 0291eb2aa252298a769b04d075e4a9d747ff7264
   GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
+  GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
+  GTMSessionFetcher: fc75fc972958dceedee61cb662ae1da7a83a91cf
   location: 155caecf9da4f280ab5fe4a55f94ceccfab838f8
   path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
 
 PODFILE CHECKSUM: 1959d098c91d8a792531a723c4a9d7e9f6a01e38
 

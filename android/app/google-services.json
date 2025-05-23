@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "515416426951",
+    "project_id": "zen-app-32585",
+    "storage_bucket": "zen-app-32585.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:515416426951:android:71359eb0860f6729c8b1e2",
+        "android_client_info": {
+          "package_name": "com.example.zen_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF_buvhIUmf6J1-q-CS7oEewE6agAVyr0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -12,16 +12,17 @@ class CustomButton extends StatelessWidget {
   final double? fontSize;
   // final VoidCallback onTap;
   final Function() onPress;
-  const CustomButton({
-    super.key,
-    required this.text,
-    this.icon,
-    required this.onPress,
-    this.hasIcon = false,
-    this.bgColor,
-    this.textColor,
-    this.fontSize = 20,
-  });
+  final bool isRounded;
+  const CustomButton(
+      {super.key,
+      required this.text,
+      this.icon,
+      required this.onPress,
+      this.hasIcon = false,
+      this.bgColor,
+      this.textColor,
+      this.fontSize = 20,
+      this.isRounded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,9 @@ class CustomButton extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           color: bgColor ?? AppColor().black,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: isRounded
+              ? BorderRadius.circular(100)
+              : BorderRadius.circular(12),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
